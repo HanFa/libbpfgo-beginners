@@ -1,4 +1,4 @@
-FROM ubuntu:20.10
+FROM ubuntu:20.04
 
 # Define variables.
 ARG GOVERSION=1.15.15
@@ -26,4 +26,4 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # Execute build command.
-ENTRYPOINT ["/usr/bin/make", "all"]
+CMD ["/usr/bin/make", "all"]

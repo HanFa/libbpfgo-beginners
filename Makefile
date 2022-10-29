@@ -9,6 +9,8 @@ BPF_SRC := *.bpf.c
 LIBBPF_HEADERS := /usr/include/bpf
 LIBBPF_OBJ := /usr/lib/$(ARCH)-linux-gnu/libbpf.a
 
+IMAGE := libbpfgo-env
+
 .PHONY: all
 all: $(TARGET) $(TARGET_BPF)
 
@@ -25,4 +27,9 @@ $(TARGET_BPF): $(BPF_SRC)
 .PHONY: clean
 clean:
 	go clean
-	
+
+docker_build:
+	docker build --platform linux/x86_64 . -t $(IMAGE)
+
+docker_run:
+	docker run --rm -it -v $(shell pwd)/:/app/:z $(IMAGE) bash
